@@ -1,0 +1,13 @@
+title: Brei Hulp
+description: Breicalculator voor het berekenen van steken, dichtheid en patronen
+baseurl: ""
+url: ""
+
+# GitHub Pages theme (geen externe theme nodig)
+plugins: []
+
+# Uitsluitingen
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md

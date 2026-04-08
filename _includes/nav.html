@@ -1,0 +1,9 @@
+<nav class="site-nav">
+  <a class="nav-brand" href="{{ '/' | relative_url }}">🧶 Brei Hulp</a>
+  <ul class="nav-links">
+    <li><a href="{{ '/calculator/' | relative_url }}" {% if page.url contains 'calculator' %}class="active"{% endif %}>Steken minderen</a></li>
+    <li><a href="{{ '/garndichtheid/' | relative_url }}" {% if page.url contains 'garndichtheid' %}class="active"{% endif %} class="coming-soon">Garndichtheid <span class="badge">binnenkort</span></a></li>
+    <li><a href="{{ '/patroon/' | relative_url }}" {% if page.url contains 'patroon' %}class="active"{% endif %} class="coming-soon">Patroon <span class="badge">binnenkort</span></a></li>
+    <li><a href="{{ '/positie/' | relative_url }}" {% if page.url contains 'positie' %}class="active"{% endif %} class="coming-soon">Positie <span class="badge">binnenkort</span></a></li>
+  </ul>
+</nav>
