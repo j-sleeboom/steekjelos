@@ -99,3 +99,21 @@ function calculate() {
 
 // Enter-toets ondersteuning
 document.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+
+// Prefill vanuit garndichtheid-pagina
+window.addEventListener('DOMContentLoaded', () => {
+  const start = sessionStorage.getItem('prefill_start');
+  const rows  = sessionStorage.getItem('prefill_rows');
+  if (start) {
+    document.getElementById('startSt').value = start;
+    sessionStorage.removeItem('prefill_start');
+  }
+  if (rows) {
+    document.getElementById('totalRows').value = rows;
+    sessionStorage.removeItem('prefill_rows');
+  }
+  if (start || rows) {
+    const banner = document.getElementById('prefillBanner');
+    if (banner) banner.style.display = 'flex';
+  }
+});

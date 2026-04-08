@@ -3,8 +3,111 @@ layout: default
 title: Garndichtheid
 ---
 
-<div class="placeholder">
-  <span class="ph-icon">📏</span>
-  <h2>Garndichtheid – binnenkort</h2>
-  <p>Hier kun je straks invoeren hoeveel steken en rijen er passen in 10×10 cm, zodat je afmetingen in centimeters kunt gebruiken in plaats van steektellingen.</p>
+<div class="page-header">
+  <span class="icon">📏</span>
+  <h1>Garn<em>dichtheid</em></h1>
+  <p>Reken centimeters om naar steken en rijen via je proeflapje</p>
 </div>
+
+<!-- Stap 1: Proeflapje -->
+<div class="card">
+  <h2><span>🧪</span> Stap 1 – Proeflapje</h2>
+  <p style="font-size:0.88rem; color:var(--muted); margin-bottom:18px; line-height:1.6;">
+    Brei een proeflapje van minimaal 15×15 cm met jouw garen en naalden. Meet daarna hoeveel steken en rijen er in <strong>10 cm</strong> passen.
+  </p>
+
+  <div class="row-2">
+    <div class="field">
+      <label for="stitchesPer10">Steken per 10 cm</label>
+      <input type="number" id="stitchesPer10" min="1" step="0.5" placeholder="bv. 22">
+      <span class="hint">Tel horizontaal</span>
+    </div>
+    <div class="field">
+      <label for="rowsPer10">Rijen per 10 cm</label>
+      <input type="number" id="rowsPer10" min="1" step="0.5" placeholder="bv. 30">
+      <span class="hint">Tel verticaal</span>
+    </div>
+  </div>
+
+  <div class="gauge-tip">
+    💡 Meet altijd in het <em>midden</em> van je lapje – de randen trekken samen en geven een vertekend beeld.
+  </div>
+</div>
+
+<!-- Stap 2: Doelmaten -->
+<div class="card">
+  <h2><span>📐</span> Stap 2 – Doelmaten</h2>
+  <p style="font-size:0.88rem; color:var(--muted); margin-bottom:18px; line-height:1.6;">
+    Vul de gewenste afmetingen in centimeters in. Je kunt één of beide invullen.
+  </p>
+
+  <div class="row-2">
+    <div class="field">
+      <label for="targetWidth">Breedte (cm)</label>
+      <input type="number" id="targetWidth" min="1" step="0.5" placeholder="bv. 50">
+      <span class="hint">→ geeft aantal steken</span>
+    </div>
+    <div class="field">
+      <label for="targetHeight">Hoogte (cm)</label>
+      <input type="number" id="targetHeight" min="1" step="0.5" placeholder="bv. 60">
+      <span class="hint">→ geeft aantal rijen</span>
+    </div>
+  </div>
+
+  <div id="gaugeErr" class="error"></div>
+  <button class="btn" onclick="calculateGauge()">🧮 Bereken steken &amp; rijen</button>
+</div>
+
+<!-- Resultaat -->
+<div id="gaugeResult" style="display:none; max-width:520px; margin:0 auto;">
+  <div class="card">
+    <h2><span>✅</span> Jouw berekening</h2>
+
+    <div class="summary-grid">
+      <div class="summary-box">
+        <span class="num" id="resStitches">–</span>
+        <span class="lbl">Steken (breedte)</span>
+      </div>
+      <div class="summary-box">
+        <span class="num" id="resRows">–</span>
+        <span class="lbl">Rijen (hoogte)</span>
+      </div>
+      <div class="summary-box">
+        <span class="num" id="resWidth">–</span>
+        <span class="lbl">Breedte</span>
+      </div>
+      <div class="summary-box">
+        <span class="num" id="resHeight">–</span>
+        <span class="lbl">Hoogte</span>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="density-row">
+      <div class="density-item">
+        <span class="density-num" id="densityStitches">–</span>
+        <span class="density-lbl">steken per cm</span>
+      </div>
+      <div class="density-sep">×</div>
+      <div class="density-item">
+        <span class="density-num" id="densityRows">–</span>
+        <span class="density-lbl">rijen per cm</span>
+      </div>
+    </div>
+
+    <!-- Doorgaan naar calculator -->
+    <div id="prefillNotice" class="prefill-notice" style="display:none;">
+      <div>
+        <strong>Doorgaan naar de minderencalculator?</strong><br>
+        <span style="font-size:0.82rem; color:var(--muted);">
+          Beginaantal <strong id="prefillStitches">–</strong> steken &amp;
+          <strong id="prefillRows">–</strong> rijen worden alvast ingevuld.
+        </span>
+      </div>
+      <button class="btn btn-small" onclick="goToCalculator()">Ga verder →</button>
+    </div>
+  </div>
+</div>
+
+<script src="{{ '/assets/js/garndichtheid.js' | relative_url }}"></script>
