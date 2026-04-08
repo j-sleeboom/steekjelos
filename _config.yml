@@ -1,7 +1,7 @@
 title: Brei Hulp
 description: Breicalculator voor het berekenen van steken, dichtheid en patronen
-baseurl: ""
-url: ""
+baseurl: "/steekjelos"
+url: "https://j-sleeboom.github.io"
 
 # GitHub Pages theme (geen externe theme nodig)
 plugins: []
