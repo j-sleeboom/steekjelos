@@ -2,6 +2,12 @@
 //  Brei Hulp – Garndichtheid calculator
 // ============================================
 
+function showGaugeError(msg) {
+  const err = document.getElementById('gaugeErr');
+  err.textContent = msg;
+  err.classList.add('visible');
+}
+
 function calculateGauge() {
   const stitchesPer10 = parseFloat(document.getElementById('stitchesPer10').value);
   const rowsPer10     = parseFloat(document.getElementById('rowsPer10').value);
@@ -11,13 +17,13 @@ function calculateGauge() {
   const result        = document.getElementById('gaugeResult');
 
   err.classList.remove('visible');
-  result.classList.remove('visible');
+  result.style.display = 'none';
 
   if (!stitchesPer10 || !rowsPer10) {
-    showError('⚠️ Vul het proeflapje in (steken én rijen per 10 cm).'); return;
+    showGaugeError('⚠️ Vul het proeflapje in (steken én rijen per 10 cm).'); return;
   }
   if (!targetW && !targetH) {
-    showError('⚠️ Vul minimaal één doelmaat in (breedte of hoogte).'); return;
+    showGaugeError('⚠️ Vul minimaal één doelmaat in (breedte of hoogte).'); return;
   }
 
   const stitchesPerCm = stitchesPer10 / 10;
@@ -36,24 +42,24 @@ function calculateGauge() {
   document.getElementById('densityStitches').textContent = stitchesPerCm.toFixed(2);
   document.getElementById('densityRows').textContent     = rowsPerCm.toFixed(2);
 
-  result.classList.add('visible');
+  // Toon resultaatblok
+  result.style.display = 'block';
   result.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-  // Vul de calculator-velden alvast in als de gebruiker wil doorgaan
-  document.getElementById('prefillNotice').style.display = resultStitches ? 'flex' : 'none';
-  document.getElementById('prefillStitches').textContent = resultStitches;
-  document.getElementById('prefillRows').textContent     = resultRows !== null ? resultRows : '?';
-
-  function showError(msg) {
-    err.textContent = msg;
-    err.classList.add('visible');
+  // Doorgaan-knop
+  const notice = document.getElementById('prefillNotice');
+  if (resultStitches) {
+    document.getElementById('prefillStitches').textContent = resultStitches;
+    document.getElementById('prefillRows').textContent     = resultRows !== null ? resultRows : '?';
+    notice.style.display = 'flex';
+  } else {
+    notice.style.display = 'none';
   }
 }
 
 function goToCalculator() {
   const stitches = document.getElementById('resStitches').textContent;
   const rows     = document.getElementById('resRows').textContent;
-  // Sla op in sessionStorage zodat de calculator-pagina het kan inlezen
   if (stitches !== '–') sessionStorage.setItem('prefill_start', stitches);
   if (rows     !== '–') sessionStorage.setItem('prefill_rows',  rows);
   window.location.href = '/steekjelos/calculator/';
